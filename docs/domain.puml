@@ -1,0 +1,59 @@
+@startuml
+!pragma layout smetana
+skinparam dpi 160
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam defaultFontName Arial
+skinparam defaultFontSize 15
+skinparam classBackgroundColor #FFFFFF
+skinparam classBorderColor #334155
+skinparam ArrowColor #475569
+hide empty members
+
+class Student
+class Registration {
+ - id : String
+ - status : RegistrationStatus
+ - registeredAt : LocalDateTime
+ + isActive() : boolean
+ + cancel(at : LocalDateTime) : void
+}
+class CourseSection {
+ - id : String
+ - capacity : int
+ - schedules : List<Schedule>
+ + conflictsWith(other : CourseSection) : boolean
+}
+class Course {
+ - id : String
+ - name : String
+ - credits : int
+ - prerequisites : List<Prerequisite>
+}
+class Schedule {
+ - day : DayOfWeek
+ - start : LocalTime
+ - end : LocalTime
+ + conflictsWith(other : Schedule) : boolean
+}
+class Prerequisite {
+ - requiredCourseId : String
+ + isSatisfiedBy(student : Student) : boolean
+}
+class Semester {
+ - id : String
+ - dropDeadline : LocalDate
+ + canDrop(today : LocalDate) : boolean
+}
+class Classroom {
+ - id : String
+ - capacity : int
+}
+Student "1" -- "0..*" Registration
+Registration "0..*" --> "1" CourseSection
+Course "1" -- "0..*" CourseSection
+Course "1" -- "0..*" Prerequisite
+CourseSection "1" *-- "1..*" Schedule
+CourseSection "0..*" --> "1" Semester
+CourseSection "0..*" --> "1" Classroom
+@enduml

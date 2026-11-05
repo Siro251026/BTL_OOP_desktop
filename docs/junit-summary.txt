@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: vn.nhom6.registration.RegistrationTest
+-------------------------------------------------------------------------------
+Tests run: 29, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.536 s -- in vn.nhom6.registration.RegistrationTest

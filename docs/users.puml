@@ -1,0 +1,37 @@
+@startuml
+!pragma layout smetana
+skinparam dpi 160
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam defaultFontName Arial
+skinparam defaultFontSize 15
+skinparam classBackgroundColor #FFFFFF
+skinparam classBorderColor #334155
+skinparam ArrowColor #475569
+hide empty members
+
+abstract class User {
+ - id : String
+ - fullName : String
+ - email : String
+ + getRole() : UserRole
+ + updateProfile(name : String, email : String) : void
+}
+class Student {
+ - completedCourseIds : Set<String>
+ + hasCompleted(courseId : String) : boolean
+ + getRole() : UserRole
+}
+class Admin {
+ + getRole() : UserRole
+}
+class Account {
+ - username : String
+ - salt : byte[]
+ - passwordHash : byte[]
+ + matches(password : char[]) : boolean
+}
+User <|-- Student
+User <|-- Admin
+User "1" --> "1" Account
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+!pragma layout smetana
+skinparam dpi 160
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam defaultFontName Arial
+skinparam defaultFontSize 15
+skinparam classBackgroundColor #FFFFFF
+skinparam classBorderColor #334155
+skinparam ArrowColor #475569
+hide empty members
+
+interface RegistrationObserver {
+ + onChanged(registration : Registration, event : RegistrationEvent) : void
+}
+class NotificationObserver
+class StatisticsObserver
+class RegistrationService {
+ + register(section : CourseSection) : Registration
+ + drop(registration : Registration) : void
+ + addObserver(observer : RegistrationObserver) : void
+ + removeObserver(observer : RegistrationObserver) : void
+ + availableSeats(section : CourseSection) : int
+}
+RegistrationObserver <|.. NotificationObserver
+RegistrationObserver <|.. StatisticsObserver
+RegistrationService o-- "0..*" RegistrationObserver
+@enduml

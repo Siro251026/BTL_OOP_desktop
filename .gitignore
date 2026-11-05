@@ -1,0 +1,11 @@
+target/
+.idea/
+*.iml
+*.jar
+*.log
+docs/junit-results.xml
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db

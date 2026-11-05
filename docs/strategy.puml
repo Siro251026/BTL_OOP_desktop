@@ -1,0 +1,24 @@
+@startuml
+!pragma layout smetana
+skinparam dpi 160
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam defaultFontName Arial
+skinparam defaultFontSize 15
+skinparam classBackgroundColor #FFFFFF
+skinparam classBorderColor #334155
+skinparam ArrowColor #475569
+hide empty members
+
+interface CourseSearchStrategy {
+ + matches(course : Course, keyword : String) : boolean
+}
+class SearchByCodeStrategy
+class SearchByNameStrategy
+class CourseCatalogService {
+ + search(keyword : String, strategy : CourseSearchStrategy) : List<Course>
+}
+CourseSearchStrategy <|.. SearchByCodeStrategy
+CourseSearchStrategy <|.. SearchByNameStrategy
+CourseCatalogService ..> CourseSearchStrategy
+@enduml
